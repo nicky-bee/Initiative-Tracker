@@ -1,0 +1,98 @@
+<div class="main-container">
+  <h1 class="sidebar-header">Initiative Tracker</h1>
+  <%= button_to 'Roll Initiative for All', roll_initiatives_path, method: :post %>
+
+  <div id="initiative-order">
+    <% @creatures.each_with_index do |creature, index| %>
+      <div id="creature-<%= index %>" class="creature-card">
+        <% if creature.portrait.present? %>
+          <img src="<%= creature.portrait %>" alt="<%= creature.name %>" class="<%= 'active' if index == @current_turn_index %>">
+        <% else %>
+          <div class="<%= 'active' if index == @current_turn_index %>"></div>
+        <% end %>
+        <p><%= creature.name %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <button onclick="nextTurn()">Next Turn</button>
+
+  <div class="sidebar">
+    <%= form_with url: creatures_path, method: :post do %>
+      <div>
+        <%= label_tag :name, "Combatant Name" %>
+        <%= text_field_tag :name %>
+      </div>
+
+      <div>
+        <%= label_tag :initiative_modifier, "Initiative Modifier" %>
+        <%= number_field_tag :initiative_modifier %>
+      </div>
+
+      <div>
+        <%= label_tag :portrait, "Combatant Portrait" %>
+        <%= text_field_tag :portrait %>
+      </div>
+
+      <div>
+        <%= label_tag :quantity, "Combatant Quantity" %>
+        <%= number_field_tag :quantity %>
+      </div>
+
+      <%= submit_tag "Add Combatant(s)" %>
+    <% end %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Initiative Modifier</th>
+          <th>Portrait</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @creatures.each do |creature| %>
+          <tr>
+            <td><%= creature.name %></td>
+            <td><%= creature.initiative_modifier %></td>
+            <td>
+              <% if creature.portrait.present? %>
+                <img src="<%= creature.portrait %>" alt="<%= creature.name %>" width="50">
+              <% else %>
+                No Portrait
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= form_with(url: import_encounter_creatures_path, method: :post, local: true, html: { enctype: 'multipart/form-data' }) do |form| %>
+      <%= form.file_field :file %>
+      <%= form.submit 'Import Encounter' %>
+    <% end %>
+
+    <%= link_to 'Export Encounter', export_encounter_creatures_path, class: 'btn btn-primary' %>
+
+    <%= button_to 'Clear Encounters', clear_encounters_creatures_path, method: :delete, data: { confirm: 'Are you sure you want to clear all encounters?' }, class: 'btn btn-danger' %>
+
+  </div>
+</div>
+
+<script>
+  let currentTurnIndex = 0;
+  const creatures = <%= @creatures.to_json.html_safe %>;
+
+  // Function to move to the next turn
+  function nextTurn() {
+    // Remove highlight from the current creature
+    document.getElementById(`creature-${currentTurnIndex}`).querySelector('img, div').classList.remove('active');
+
+    // Move to the next creature in the initiative order
+    currentTurnIndex = (currentTurnIndex + 1) % creatures.length;
+    console.log(currentTurnIndex);
+
+    // Highlight the current creature
+    document.getElementById(`creature-${currentTurnIndex}`).querySelector('img, div').classList.add('active');
+  }
+</script>

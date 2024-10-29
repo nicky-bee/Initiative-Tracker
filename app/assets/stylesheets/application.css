@@ -1,0 +1,161 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1b1b1b;
+  color: #eaeaea;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+h1 {
+  color: #c29dff;
+  text-align: center;
+  margin: 0;
+}
+
+#initiative-order {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  background-color: #333;
+  border: 2px solid #444;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.creature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+  color: #fff;
+}
+
+.creature-card img,
+.creature-card div {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-color: #000;
+}
+
+.creature-card p {
+  margin-top: 4px;
+  font-weight: bold;
+  text-align: center;
+  color: #c29dff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4b0082;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #5e18a6;
+}
+
+.sidebar {
+  width: 100%;
+  background-color: #2d2d2d;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  font-weight: bold;
+  color: #d4d4d4;
+  margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  padding: 8px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #eaeaea;
+}
+
+form input[type="submit"] {
+  padding: 10px;
+  background-color: #4b0082;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #5e18a6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #444;
+  color: #eaeaea;
+}
+
+.creature-card img.active,
+.creature-card div.active {
+  border-color: #ffbf00;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #4b0082;
+}
+
+.btn-primary {
+  font-size: 13px;
+  text-align: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #4b0082;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
